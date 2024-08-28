@@ -12,9 +12,11 @@ return new class extends Migration {
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id('id')->primary();
-            $table->string('title');
+            $table->string('title')->unique();
+            $table->string('slug')->unique();
             $table->text('description');
-            $table->string('posted_by');
+            $table->string('image');
+            $table->softDeletes();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
         });

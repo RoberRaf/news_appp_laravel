@@ -16,5 +16,6 @@
         <p><strong>Title:</strong> {{$post['title']}} </p>
          <strong>Description:-</strong>
         <p>{{$post['description']}}</p>
+        <img src="{{asset('posts_images/'.$post->image)}}" style="height: 150px; aspect-ratio: 1"  alt="">
     </div>
 @endsection

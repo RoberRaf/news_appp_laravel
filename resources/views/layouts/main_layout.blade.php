@@ -19,8 +19,10 @@
         </div>
     </div>
 </nav>
+
 <section class="container">
     @yield('content')
 </section>
+
 </body>
 </html>

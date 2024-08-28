@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Arr;
 use App\Models\Post;
 
-class PostController extends Controller
+class RawPostController extends Controller
 {
 
 

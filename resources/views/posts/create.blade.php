@@ -21,7 +21,8 @@
             </ul>
         </div>
     @endif
-    <form method="post" action="{{route('posts.create')}}">
+    <form method="post" action="{{route('posts.store')}}" enctype="multipart/form-data">
+        @method('POST')
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -37,14 +38,20 @@
 
             <div class="mb-3">
                 <label for="disabledSelect" class="form-label">Creator Name</label>
-                <select id="disabledSelect" name="posted_by" class="form-select">
+                <select id="disabledSelect" name="creator_id" class="form-select">
                     <option disabled selected>--select name--</option>
-                    <option @if(old('posted_by') == 'Ahmed' ) selected @endif value="Ahmed">Ahmed</option>
-                    <option @if(old('posted_by') == 'Omar' ) selected @endif  value="Omar">Omar</option>
+                    @foreach($creators as $creator)
+                        <option @if(old('creator_id') == $creator->id ) selected
+                                @endif value="{{$creator->id}}">{{$creator->name}}</option>
+                    @endforeach
                 </select>
             </div>
 
         </fieldset>
+        <div class="mb-3">
+            <label for="image" class="form-label">Description</label>
+            <input id="image" type="file" name="image" value="">
+        </div>
 
         <button type="submit" class="btn btn-primary">Submit</button>
     </form>

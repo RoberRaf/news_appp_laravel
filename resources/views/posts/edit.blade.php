@@ -20,7 +20,8 @@
             </ul>
         </div>
     @endif
-    <form method="post" action="{{route('posts.edit',['id'=>$post['id']])}}">
+    <form method="post" action="{{route('posts.update',$post)}}" enctype="multipart/form-data">
+        @method('PATCH')
         @csrf
         <div class="mb-3">
             <label for="title" class="form-label">Title</label>
@@ -29,16 +30,26 @@
         </div>
         <div class="mb-3">
             <label for="description" class="form-label">Description</label>
-            <textarea name="description" class="form-control" id="description">{{old('description')?? $post['description']}}</textarea>
+            <textarea name="description" class="form-control"
+                      id="description">{{old('description')?? $post['description']}}</textarea>
         </div>
         <fieldset>
 
             <div class="mb-3">
                 <label for="disabledSelect" class="form-label">Creator Name</label>
-                <select id="disabledSelect" class="form-select" name="posted_by">
-                    <option @if(old('posted_by') ?? $post['posted_by'] == 'Ahmed' ) selected @endif value="Ahmed">Ahmed</option>
-                    <option @if(old('posted_by') ?? $post['posted_by'] == 'Omar' ) selected @endif  value="Omar">Omar</option>
+                <select id="disabledSelect" name="creator_id" class="form-select">
+                    <option disabled selected>--select name--</option>
+                    @foreach($creators as $creator)
+                        <option @if((old('creator_id') ?? $post->creator->id) == $creator->id ) selected
+                                @endif
+                                 value="{{$creator->id}}">
+                            {{$creator->name}}</option>
+                    @endforeach
                 </select>
+            </div>
+            <div class="mb-3">
+                <label for="image" class="form-label">Description</label>
+                <input id="image" type="file" name="image">
             </div>
 
         </fieldset>

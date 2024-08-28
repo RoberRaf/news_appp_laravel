@@ -55,6 +55,13 @@ return [
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
             'throw' => false,
         ],
+        "posts_images" =>[
+            'driver' => 'local',
+            'root' => public_path('posts_images'),
+            'url' => env('APP_URL').'/storage/posts_images',
+            'visibility' => 'public',
+            'throw' => false,
+        ]
 
     ],
 
