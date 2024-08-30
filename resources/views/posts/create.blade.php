@@ -1,4 +1,5 @@
-@extends('layouts.main_layout')
+@extends('layouts.app')
+
 
 @section('title')
     Create New Post
@@ -34,22 +35,20 @@
             <textarea class="form-control" name="description"
                       id="exampleInputPassword1">{{old('description')}}</textarea>
         </div>
-        <fieldset>
-
-            <div class="mb-3">
-                <label for="disabledSelect" class="form-label">Creator Name</label>
-                <select id="disabledSelect" name="creator_id" class="form-select">
-                    <option disabled selected>--select name--</option>
-                    @foreach($creators as $creator)
-                        <option @if(old('creator_id') == $creator->id ) selected
-                                @endif value="{{$creator->id}}">{{$creator->name}}</option>
-                    @endforeach
-                </select>
-            </div>
-
-        </fieldset>
+{{--        <fieldset>--}}
+{{--            <div class="mb-3">--}}
+{{--                <label for="disabledSelect" class="form-label">Creator Name</label>--}}
+{{--                <select id="disabledSelect" name="creator_id" class="form-select">--}}
+{{--                    <option disabled selected>--select name--</option>--}}
+{{--                    @foreach($creators as $creator)--}}
+{{--                        <option @if(old('creator_id') == $creator->id ) selected--}}
+{{--                                @endif value="{{$creator->id}}">{{$creator->name}}</option>--}}
+{{--                    @endforeach--}}
+{{--                </select>--}}
+{{--            </div>--}}
+{{--        </fieldset>--}}
         <div class="mb-3">
-            <label for="image" class="form-label">Description</label>
+            <label for="image" class="form-label">Image</label>
             <input id="image" type="file" name="image" value="">
         </div>
 

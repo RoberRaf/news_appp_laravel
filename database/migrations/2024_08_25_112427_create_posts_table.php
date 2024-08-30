@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('posts', function (Blueprint $table) {
             $table->id('id')->primary();
+            $table->foreignId('user_id')->constrained('users', 'id')->onDelete('cascade');
             $table->string('title')->unique();
             $table->string('slug')->unique();
             $table->text('description');
@@ -19,6 +20,7 @@ return new class extends Migration {
             $table->softDeletes();
             $table->timestamp('created_at')->useCurrent();
             $table->timestamp('updated_at')->useCurrent();
+
         });
     }
 
@@ -27,6 +29,9 @@ return new class extends Migration {
      */
     public function down(): void
     {
+        Schema::table('posts', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+        });
         Schema::dropIfExists('posts');
     }
 };

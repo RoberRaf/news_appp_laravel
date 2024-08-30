@@ -4,20 +4,38 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RawPostController;
 use App\Http\Controllers\PostController;
 
-//
-//Route::get('/', function () {
-//    $posts = Post::paginate(3);
-//    return view('index', ['posts' => $posts,]);// 'pageNu
-//})->name('posts.index');
 
-//
-Route::redirect('/', 'posts')->name('posts.index');
-//Route::get('/posts/create', [RawPostController::class, 'create'])->name('posts.create');
-//Route::get('/posts/edit/{id}', [RawPostController::class, 'edit'])->name('posts.edit')->where('id', '[0-9]+');
-//Route::get('/posts/show/{id}', [RawPostController::class, 'show'])->name('posts.show')->where('id', '[0-9]+');
-//Route::post('/posts/create', [RawPostController::class, 'submitNewPost'])->name('posts.create');
-//Route::post('/posts/edit/{id}', [RawPostController::class, 'editPost'])->name('posts.edit')->where('id', '[0-9]+');
-//Route::get('/posts/delete/{id}', [RawPostController::class, 'delete'])->name('posts.delete')->where('id', '[0-9]+');
-
-Route::get('posts/restore', [PostController::class, 'restore'])->name('posts.restore');
+Route::redirect('/', '/home')->name('posts.index');
 Route::resource('posts', PostController::class);
+Route::get('posts/restore', [PostController::class, 'restore'])->name('posts.restore');
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+
+/*
+*  GET|HEAD        api/user ....................................................................................
+*  GET|HEAD        home ............................................................ home › HomeController@index
+*  GET|HEAD        login ............................................ login › Auth\LoginController@showLoginForm
+*  POST            login ............................................................ Auth\LoginController@login
+*  POST            logout ................................................. logout › Auth\LoginController@logout
+*  GET|HEAD        password/confirm .......... password.confirm › Auth\ConfirmPasswordController@showConfirmForm
+*  POST            password/confirm ..................................... Auth\ConfirmPasswordController@confirm
+*  POST            password/email ............ password.email › Auth\ForgotPasswordController@sendResetLinkEmail
+*  GET|HEAD        password/reset ......... password.request › Auth\ForgotPasswordController@showLinkRequestForm
+*  POST            password/reset ......................... password.update › Auth\ResetPasswordController@reset
+*  GET|HEAD        password/reset/{token} .......... password.reset › Auth\ResetPasswordController@showResetForm
+*  GET|HEAD        posts .................................................... posts.index › PostController@index
+*  POST            posts .................................................... posts.store › PostController@store
+*  GET|HEAD        posts/create ........................................... posts.create › PostController@create
+*  GET|HEAD        posts/restore ........................................ posts.restore › PostController@restore
+*  GET|HEAD        posts/{post} ............................................... posts.show › PostController@show
+*  PUT|PATCH       posts/{post} ........................................... posts.update › PostController@update
+*  DELETE          posts/{post} ......................................... posts.destroy › PostController@destroy
+*  GET|HEAD        posts/{post}/edit .......................................... posts.edit › PostController@edit
+*  GET|HEAD        register ............................ register › Auth\RegisterController@showRegistrationForm
+*  POST            register ................................................... Auth\RegisterController@register
+*  GET|HEAD        sanctum/csrf-cookie ....... sanctum.csrf-cookie › Laravel\Sanctum › CsrfCookieController@show
+*  GET|HEAD        up ..........................................................................................
+*/

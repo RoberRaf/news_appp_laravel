@@ -1,4 +1,5 @@
-@extends('layouts.main_layout')
+@extends('layouts.app')
+
 
 @section('title')
     Home
@@ -37,6 +38,7 @@
         <tr>
             <th scope="col">Id</th>
             <th scope="col">Title</th>
+            <th scope="col">Slug</th>
             <th scope="col">Image</th>
             <th scope="col">Posted By</th>
             <th scope="col">Created At</th>
@@ -48,18 +50,19 @@
             <tr>
                 <td>{{$post->id}}</td>
                 <td>{{$post->title}}</td>
+                <td>{{$post->slug}}</td>
                 <td><img src="{{asset("posts_images/". $post->image)}}" style="height: 50px; width: 50px" alt=""></td>
-                <td>{{$post->creator->name}}</td>
-                <td>{{$post->created_at->toFormattedDateString()}}</td>
+                <td>{{$post->user->name}}</td>
+                <td>{{$post->created_at}}</td>
                 <td><a class="btn btn-info" href="{{route('posts.show',$post)}}"
                        role="button">View</a>
                     <a class="btn btn-primary" href="{{route('posts.edit',$post)}}"
                        role="button">Edit</a>
-                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAlert"
+                    <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteAlert{{$post->id}}"
                        role="button">Delete</a></td>
             </tr>
 
-            <div class="modal fade" id="deleteAlert" tabindex="-1" aria-labelledby="exampleModalLabel"
+            <div class="modal fade" id="deleteAlert{{$post->id}}" tabindex="-1" aria-labelledby="exampleModalLabel"
                  aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
@@ -69,7 +72,7 @@
                                     aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            Are You Shure you want to delete this post?
+                            Are You Sure you want to delete this post?
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

@@ -1,4 +1,5 @@
-@extends('layouts.main_layout')
+@extends('layouts.app')
+
 
 @section('title')
     Show Post
