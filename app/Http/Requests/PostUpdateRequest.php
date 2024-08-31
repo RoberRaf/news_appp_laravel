@@ -23,14 +23,14 @@ class PostUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required|min:3',
+            'title' => 'required|min:3|unique:App\Models\Post,title',
             'description' => 'required|min:10',
 //            'creator_id' => 'required',
             "image" => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ];
     }
 
-    public function messages() :array
+    public function messages(): array
     {
         return [
             'title.required' => 'Title is required',
